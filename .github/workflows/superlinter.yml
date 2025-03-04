@@ -30,7 +30,3 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN:
             ${{ secrets.GITHUB_TOKEN }}
-
-            # ✅ Enable debug mode to show scanned files
-          ACTIONS_RUNNER_DEBUG: true
-          VALIDATE_VERBOSE: true # Shows file-wise linting details

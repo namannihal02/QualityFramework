@@ -1,21 +1,35 @@
+terraform {
+  required_version = ">= 1.3.0"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 3.0.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "my-rg"   # Hardcoded name
-  location = "East US" # Hardcoded location
+  name     = "example-resource-group"
+  location = "East US"
 }
 
 resource "azurerm_storage_account" "example" {
-  name                     = "storageaccountname"  # Invalid: Storage account names must be globally unique
+  name                     = "examplestoracc1234"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  access_tier              = "Cool"   # Deprecated attribute in some versions
+}
 
-  tags = {
-    environment = "production"
-  }
+output "storage_account_name" {
+  value = azurerm_storage_account.example.name
+}
+
+output "resource_group_name" {
+  value = azurerm_resource_group.example.name
 }
