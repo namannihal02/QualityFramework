@@ -15,3 +15,8 @@ variable "location" {
 #   type        = string
 #   default = "mystorageacc123"
 # }
+
+variable "subscription_id" {}
+variable "client_id" {}
+variable "client_secret" {}
+variable "tenant_id" {}
