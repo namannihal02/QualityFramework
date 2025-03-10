@@ -3,7 +3,7 @@ name: "Terraform Deployment"
 on:
   push:
     branches:
-      - users/shubhi/terraform
+      - users/shubhi/terraform  # Use the correct branch name
   pull_request:
     branches:
       - users/shubhi/terraform
@@ -11,24 +11,23 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
 
-      - name: Azure Login
-        uses: azure/login@v1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          fetch-depth: 0
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.3.0
+          terraform_version: 1.6.0  # Use the latest stable version
 
-      - name: Terraform Init
+      - name: Initialize Terraform
         run: terraform init
+        working-directory: terraform  # Ensure Terraform runs inside the correct directory
 
-      -  name: Terraform Plan
-         run: terraform plan -out=tfplan
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: terraform
 
-    
