@@ -10,8 +10,8 @@ variable "location" {
   default = "East US"
 }
 
-variable "storage_account_name" {
-  description = "Storage Account Name"
-  type        = string
-  default = "mystorageacc123"
-}
+# variable "storage_account_name" {
+#   description = "Storage Account Name"
+#   type        = string
+#   default = "mystorageacc123"
+# }
