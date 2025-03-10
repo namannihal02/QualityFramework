@@ -1,1 +1,39 @@
+name: "Terraform Deployment"
+
+on:
+  push:
+    branches:
+      - users/shubhi/terraform  # Use the correct branch name
+  pull_request:
+    branches:
+      - users/shubhi/terraform
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0  # Use the latest stable version
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: terraform  
+        
+
+      - name: Terraform Plan
+        run: terraform plan 
+        working-directory: terraform
+        env:
+          SUBSCRIPTION-ID: ${{ secrets.SUBSCRIPTION_ID }}
+          CLIENT-ID: ${{ secrets.CLIENT_ID }}
+          CLIENT-SECRET: ${{ secrets.CLIENT_SECRET }}
+          TENANT-ID: ${{ secrets.TENANT_ID }}
 
