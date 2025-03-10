@@ -32,8 +32,8 @@ jobs:
         run: terraform plan 
         working-directory: terraform
         env:
-          SUBSCRIPTION-ID: ${{ secrets.SUBSCRIPTION_ID }}
-          CLIENT-ID: ${{ secrets.CLIENT_ID }}
-          CLIENT-SECRET: ${{ secrets.CLIENT_SECRET }}
-          TENANT-ID: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          tenant-id: ${{ secrets.TENANT_ID }}
 
