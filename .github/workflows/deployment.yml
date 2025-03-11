@@ -8,6 +8,11 @@ on:
     branches:
       - users/shubhi/terraform
 
+permissions:
+  contents: read
+  id-token: write
+
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -23,6 +28,14 @@ jobs:
         with:
           terraform_version: 1.6.0  # Use the latest stable version
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.client-id }}
+          tenant-id: ${{ secrets.tenant-id }}
+          subscription-id: ${{ secrets.subscription-id }}
+          client-secret: ${{ secrets.client-secret }}
+
       - name: Initialize Terraform
         run: terraform init
         working-directory: terraform  
@@ -31,9 +44,5 @@ jobs:
       - name: Terraform Plan
         run: terraform plan 
         working-directory: terraform
-        env:
-          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-          client-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          tenant-id: ${{ secrets.TENANT_ID }}
+        
 
